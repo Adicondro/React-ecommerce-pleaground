@@ -1,0 +1,36 @@
+{
+    "products" : [
+        {
+          "imageUrl":"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/220/1022005_PE832395_S5.jpg",
+          "imageAlt":"ALEX/LAGKAPTEN",
+          "productName":"ALEX/LAGKAPTEN",
+          "productPrice":"2.089.000",
+          "productStock" : "13",
+          "id": 1
+        },
+        {
+          "imageUrl":"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/436/1243689_PE920720_S5.jpg",
+          "imageAlt": "GRÖNSTA",
+          "productName":"GRÖNSTA",
+          "productPrice":"899.000",
+          "productStock": "4",
+          "id": 2
+        },
+        {
+          "imageUrl":"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/093/0609306_PE684440_S5.jpg",
+          "imageAlt":"TERTIAL",
+          "productName":"TERTIAL",
+          "productPrice":"199.000",
+          "productStock": "100",
+          "id":3
+        },
+        {
+          "imageUrl":"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/419/1041907_PE841187_S5.jpg",
+          "imageAlt":"PÄRUP",
+          "productName":"PÄRUP",
+          "productPrice":"5.395.000",
+          "productStock": "0",
+          "id": 4
+        }
+      ]
+}

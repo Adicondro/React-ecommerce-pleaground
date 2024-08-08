@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { icons } from 'lucide-react';
 import { IoIosAdd, IoIosRemove } from 'react-icons/io'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import React from 'react';
 
 const ProductCard = (props) => {
@@ -10,6 +10,8 @@ const ProductCard = (props) => {
   const addtoCart = () => {
     alert("Items Added")
   }
+
+  // Props dipakai ketika data nya berubah ubah
   
 
   const [quantity, setQuantity] = useState(0);
@@ -25,6 +27,18 @@ const ProductCard = (props) => {
       setQuantity(quantity - 1);
     }
   }
+
+  // MOUNT
+  useEffect(() => {
+    alert("Component did Mount")
+  }, []);
+
+  // UPDATE/MOUNT
+  useEffect(() => {
+    alert("Component did Update")
+  }, [quantity])
+
+
 
 
   return (

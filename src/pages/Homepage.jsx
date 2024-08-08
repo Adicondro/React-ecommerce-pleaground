@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ProductCard from '@/components/ProductCard';
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import { axiosInstance } from '@/lib/axios';
+import { Button } from '@/components/ui/button';
 
 
 const productsRaw = [
@@ -38,7 +38,9 @@ const productsRaw = [
 ]
 
 const Homepage = () => {
-    const products = productsRaw.map((product) => {
+      const [products, setProducts] = useState([])
+
+    const productsList = products.map((product) => {
         return(
           <ProductCard
             imageUrl = {product.imageUrl}
@@ -50,6 +52,15 @@ const Homepage = () => {
         )
       })
       
+      const fetchProducts = async () => {
+        try {
+          const response = await axiosInstance.get("/products")
+          console.log(response.data)
+          setProducts(response.data)
+        } catch (err) {
+          console.log(err)
+        }
+      }
       
       return (
         <>
@@ -62,8 +73,13 @@ const Homepage = () => {
                     Pleaground provides you with the finest interior and ensures your confidence throughout your days.
                 </p>
                 </div>
+
+                <Button onClick={fetchProducts}>Fetch Products</Button>
+
+
+                {/* Masukkan Produk Disini */}
                 <div className='grid grid-cols-2 gap-4'>
-                {products}
+                {productsList}
                 </div>
             </main>
         </>
