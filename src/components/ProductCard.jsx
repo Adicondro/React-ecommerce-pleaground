@@ -28,15 +28,23 @@ const ProductCard = (props) => {
     }
   }
 
-  // MOUNT
-  useEffect(() => {
-    alert("Component did Mount")
-  }, []);
+  // // MOUNT
+  // useEffect(() => {
+  //   alert("Component did Mount")
+  // }, []);
 
-  // UPDATE/MOUNT
-  useEffect(() => {
-    alert("Component did Update")
-  }, [quantity])
+  // // UPDATE/MOUNT
+  // useEffect(() => {
+  //   alert("Component did Update")
+  // }, [quantity])
+
+  // useEffect(() => {
+    
+  //   // Unmount
+  //   return () => {
+  //     alert("Component Unmount")
+  //   }
+  // })
 
 
 

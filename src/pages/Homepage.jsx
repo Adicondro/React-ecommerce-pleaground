@@ -2,43 +2,15 @@ import React, { useState } from 'react'
 import ProductCard from '@/components/ProductCard';
 import { axiosInstance } from '@/lib/axios';
 import { Button } from '@/components/ui/button';
+import { useEffect } from 'react';
 
 
-const productsRaw = [
-  {
-    imageUrl:"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/220/1022005_PE832395_S5.jpg",
-    imageAlt:"ALEX/LAGKAPTEN",
-    productName:"ALEX/LAGKAPTEN",
-    productPrice:"2.089.000",
-    productStock:"13",
-  },
-  {
-    imageUrl:"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/436/1243689_PE920720_S5.jpg",
-    imageAlt: "GRÖNSTA",
-    productName:"GRÖNSTA",
-    productPrice:"899.000",
-    productStock:"4",
-  },
-  {
-    imageUrl:"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/093/0609306_PE684440_S5.jpg",
-    imageAlt:"TERTIAL",
-    productName:"TERTIAL",
-    productPrice:"199.000",
-    productStock:"100",
-  },
-  {
-    imageUrl:"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/419/1041907_PE841187_S5.jpg",
-    imageAlt:"PÄRUP",
-    productName:"PÄRUP",
-    productPrice:"5.395.000",
-    productStock:"0",
-  },
 
-
-]
 
 const Homepage = () => {
-      const [products, setProducts] = useState([])
+
+    const [productIsLoading, setProductIsLoading] = useState(false);
+    const [products, setProducts] = useState([])
 
     const productsList = products.map((product) => {
         return(
@@ -53,14 +25,21 @@ const Homepage = () => {
       })
       
       const fetchProducts = async () => {
+        setProductIsLoading(true)
         try {
           const response = await axiosInstance.get("/products")
           console.log(response.data)
           setProducts(response.data)
         } catch (err) {
           console.log(err)
+        } finally{
+          setProductIsLoading(false)
         }
       }
+      
+      useEffect(() => {
+        fetchProducts();
+      },[])
       
       return (
         <>
@@ -74,13 +53,14 @@ const Homepage = () => {
                 </p>
                 </div>
 
-                <Button onClick={fetchProducts}>Fetch Products</Button>
+                {productIsLoading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <div className='grid grid-cols-2 gap-4'>
+                  {productsList}
+                  </div>
+                )}
 
-
-                {/* Masukkan Produk Disini */}
-                <div className='grid grid-cols-2 gap-4'>
-                {productsList}
-                </div>
             </main>
         </>
       )
