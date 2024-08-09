@@ -15,6 +15,7 @@ const Homepage = () => {
     const productsList = products.map((product) => {
         return(
           <ProductCard
+            id = {product.id}
             imageUrl = {product.imageUrl}
             imageAlt = {product.imageAlt}
             productName = {product.productName}
@@ -37,6 +38,8 @@ const Homepage = () => {
         }
       }
       
+
+      // Fetch data once, when the page is first mounted
       useEffect(() => {
         fetchProducts();
       },[])

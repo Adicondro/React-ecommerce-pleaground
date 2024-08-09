@@ -5,6 +5,7 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import NotFoundPage from './pages/NotFoundPage'
 import LoginPage from '@/pages/LoginPage'
+import ProductDetailPage from './pages/ProductDetailPage'
 
 function App() {
   return(
@@ -15,6 +16,7 @@ function App() {
         <Route path="/cart" Component={CartPage}/>
         <Route path='/login' Component={LoginPage}/>
         <Route path="*" Component={NotFoundPage}/>
+        <Route path="/product/:productId" Component={ProductDetailPage}/>
       </Routes>
       <Footer/>
     </>

@@ -3,9 +3,10 @@ import { icons } from 'lucide-react';
 import { IoIosAdd, IoIosRemove } from 'react-icons/io'
 import { useState, useEffect } from 'react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProductCard = (props) => {
-  const {imageUrl, imageAlt, productName, productPrice, productStock} = props;
+  const {imageUrl, imageAlt, productName, productPrice, productStock, id} = props;
 
   const addtoCart = () => {
     alert("Items Added")
@@ -50,16 +51,21 @@ const ProductCard = (props) => {
 
 
   return (
-    <div className="p-4 border rounded-md md:max-w-96 flex flex-col gap-4">
-    <div className="aspect-square w-full overflow-hidden">
-      <img className='w-full' src={imageUrl} alt={imageAlt} />
-    </div>
+    
+  <div className="p-4 border rounded-md md:max-w-96 flex flex-col gap-4">
+    <Link to={"/product/" + id}>
+      <div className="aspect-square w-full overflow-hidden">
+        <img className='w-full' src={imageUrl} alt={imageAlt} />
+      </div>
+    </Link>
 
-    <div className='py-4'>
-      <p className='text-md'>{productName}</p>
-      <p className='text-xl font-semibold mt-4'>Rp. {productPrice.toLocaleString("id-ID")}</p>
-      <p className='text-muted-foreground text-sm mt-1'>In Stock : {productStock}</p>
-    </div>
+    <Link to={"/product/" + id}>
+      <div className='py-4'>
+        <p className='text-md'>{productName}</p>
+        <p className='text-xl font-semibold mt-4'>Rp. {productPrice.toLocaleString("id-ID")}</p>
+        <p className='text-muted-foreground text-sm mt-1'>In Stock : {productStock}</p>
+      </div>
+    </Link>
 
     <div className='flex flex-col gap-2'>
       <div className="flex justify-between items-center">
@@ -88,4 +94,4 @@ const ProductCard = (props) => {
   )
 }
 
-export default ProductCard;
+export default ProductCard
