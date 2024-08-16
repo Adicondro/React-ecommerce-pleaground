@@ -4,20 +4,44 @@ import { useState, useEffect } from 'react'
 import React from 'react'
 import { IoHeart, IoHeartOutline } from 'react-icons/io5'
 import { useParams } from 'react-router-dom'
+import { axiosInstance } from '@/lib/axios'
 
-const product = {
-    imageUrl:"https://d2xjmi1k71iy2m.cloudfront.net/dairyfarm/id/images/220/1022005_PE832395_S5.jpg",
-    imageAlt:"ALEX/LAGKAPTEN",
-    productName:"ALEX/LAGKAPTEN",
-    productPrice:"2.089.000",
-    productStock : "13",
-    id: 1
-}
 
 const ProductDetailPage = () => {
 
+    // Use Params (Note)
+    // Dapetin ID
+    // Fetch Product yang memiliki ID Tersebut
+    // Masukin Data Product ke State
+    // Tampilin data state ke UI
+
     const params = useParams()
+
     const [quantity, setQuantity] = useState(0);
+
+    const [product, setProduct] = useState({
+        imageUrl:"",
+        imageAlt:"",
+        productName:"",
+        productPrice:"",
+        productStock : "",
+        id: 0,
+    })
+
+    const fetchProduct = async () => {
+        try {
+            const response = await axiosInstance.get("/products/" + params.productId)
+            console.log(response.data)
+
+            setProduct(response.data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    useEffect(() => {
+        fetchProduct()
+    }, []);
 
 
   return (
@@ -26,7 +50,7 @@ const ProductDetailPage = () => {
             <img src={product.imageUrl} alt={product.imageAlt} className='w-full' />
 
             <div className='flex flex-col gap-1 justify-center'>
-                <h1 className='text-x1'>{product.name} {params.productId}</h1>
+                <h1 className='text-x1'>{product.productName} {params.productId}</h1>
                 <h3 className='text-3xl font-bold'>Rp {product.productPrice}</h3>
                 
                 <p className='text-sm text-muted-foreground mt-4'>

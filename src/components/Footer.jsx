@@ -6,7 +6,7 @@ const Footer = () => {
             <p>
                 Pleaground Copyright 2024
             </p>
-            <ContactMeButton label="Test">
+            <ContactMeButton>
                 Contact Me!
             </ContactMeButton>
         </footer>
