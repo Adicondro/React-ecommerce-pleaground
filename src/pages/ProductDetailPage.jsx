@@ -5,6 +5,7 @@ import React from 'react'
 import { IoHeart, IoHeartOutline } from 'react-icons/io5'
 import { useParams } from 'react-router-dom'
 import { axiosInstance } from '@/lib/axios'
+import { Skeleton } from '@/components/ui/skeleton'
 
 
 const ProductDetailPage = () => {
@@ -26,16 +27,21 @@ const ProductDetailPage = () => {
         productPrice:"",
         productStock : "",
         id: 0,
-    })
+    });
+
+    const [productIsLoading, setProductIsLoading] = useState(true);
 
     const fetchProduct = async () => {
         try {
+            setProductIsLoading(true)
             const response = await axiosInstance.get("/products/" + params.productId)
             console.log(response.data)
 
             setProduct(response.data)
         } catch (err) {
             console.log(err)
+        } finally {
+            setProductIsLoading(false)
         }
     }
 
@@ -47,15 +53,48 @@ const ProductDetailPage = () => {
   return (
     <main className='min-h-screen max-w-screen-lg mx-auto px-4 mt-8'>
         <div className="grid grid-cols-2 gap-8">
-            <img src={product.imageUrl} alt={product.imageAlt} className='w-full' />
+
+            
+
+            {
+                productIsLoading ? (
+                    <Skeleton className="w-full-h h-[582px]" />
+                ) : (
+                    <img src={product.imageUrl} alt={product.imageAlt} className='w-full' />
+                )
+            }
+
 
             <div className='flex flex-col gap-1 justify-center'>
-                <h1 className='text-x1'>{product.productName} {params.productId}</h1>
-                <h3 className='text-3xl font-bold'>Rp {product.productPrice}</h3>
+
                 
-                <p className='text-sm text-muted-foreground mt-4'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quod ab porro iusto harum vero explicabo? Sequi placeat accusantium veritatis ab odit, hic at voluptatem esse, consectetur est nam saepe beatae expedita reiciendis, eius atque maxime recusandae! Deserunt, doloremque modi, culpa consequatur provident illum et alias hic autem assumenda impedit.
-                </p>
+                {
+                    productIsLoading ? (
+                        <Skeleton className="w-[350px] h-[48px]" />
+                    ) : (
+                        <h1 className='text-x1'>{product.productName}</h1> 
+                    )
+                }
+                {
+                    productIsLoading ? (
+                        <Skeleton className="w-[350px] h-[48px]" />
+                    ) : (
+                        <h3 className='text-3xl font-bold'>Rp {product.productPrice}</h3>
+                    )
+                }
+                
+                
+                {
+                    productIsLoading ? (
+                        <Skeleton className="w-[350px] h-[120px] mt-4" />
+                    ) : (
+                        <p className='text-sm text-muted-foreground mt-4'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit quod ab porro iusto harum vero explicabo? Sequi placeat accusantium veritatis ab odit, hic at voluptatem esse, consectetur est nam saepe beatae expedita reiciendis, eius atque maxime recusandae! Deserunt, doloremque modi, culpa consequatur provident illum et alias hic autem assumenda impedit.
+                        </p>
+                    )
+                }
+                
+                
 
                 <div className="flex items-center gap-3 mt-6">
                     <Button 
