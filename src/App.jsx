@@ -7,6 +7,8 @@ import NotFoundPage from './pages/NotFoundPage'
 import LoginPage from '@/pages/LoginPage'
 import ProductDetailPage from './pages/ProductDetailPage'
 import ProductManagementPage from './pages/admin/ProductManagementPage'
+import CreateProductPage from './pages/admin/CreateProductPage'
+import EditProductPage from './pages/admin/EditProductPage'
 
 function App() {
   
@@ -24,9 +26,17 @@ function App() {
         <Route path="/" Component={Homepage}/>
         <Route path="/cart" Component={CartPage}/>
         <Route path='/login' Component={LoginPage}/>
-        <Route path="*" Component={NotFoundPage}/>
         <Route path="/product/:productId" Component={ProductDetailPage}/>
-        <Route path="/admin/product" Component={ProductManagementPage}/>
+
+        <Route path='/admin'>
+          <Route path="product" Component={ProductManagementPage}/>
+          <Route path="product/create" Component={CreateProductPage}/>
+          <Route path="product/edit/:productId" Component={EditProductPage}/>
+        </Route>
+
+
+        <Route path="*" Component={NotFoundPage}/>
+
       </Routes>
 
       {
